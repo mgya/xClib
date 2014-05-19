@@ -7,14 +7,14 @@ INDEX
 
 ANSI_SYNOPSIS
     #include <string.h>
-    char *tr_strncpy(char *<[dst]>, const char *<[src]>, size_t <[length]>);
+    char *string_strncpy(char *<[dst]>, const char *<[src]>, xsize_t <[length]>);
 
 TRAD_SYNOPSIS
     #include <string.h>
-    char *tr_strncpy(<[dst]>, <[src]>, <[length]>)
+    char *string_strncpy(<[dst]>, <[src]>, <[length]>)
     char *<[dst]>;
     char *<[src]>;
-    size_t <[length]>;
+    xsize_t <[length]>;
 
 DESCRIPTION
     <<strncpy>> copies not more than <[length]> characters from the
@@ -39,7 +39,7 @@ QUICKREF
 
 #include "../../string.h"
 
-char * tr_strncpy(char * dst0, const char * src0, size_t count)
+char * string_strncpy(char * dst0, const char * src0, xsize_t count)
 {
     char * dscan = dst0;
     const char * sscan = src0;

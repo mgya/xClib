@@ -1,13 +1,13 @@
 #include "../../string.h"
-#include "../../../system/varargsex.h"
+#include <xC/xvarargs.h>
 #include "./printf_.h"
 
-int tr_snprintf(char *dest, size_t size, const char *format, ...)
+int string_snprintf(char *dest, xsize_t size, const char *format, ...)
 {
   int n;
-  va_list arg_ptr;
-  va_start(arg_ptr, format);
+  xva_list_t arg_ptr;
+  XVA_START(arg_ptr, format);
   n=vsnprintf(dest,size,format,arg_ptr);
-  va_end (arg_ptr);
+  XVA_END (arg_ptr);
   return n;
 }

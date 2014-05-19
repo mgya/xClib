@@ -10,11 +10,11 @@ INDEX
 isxdigit
 
 ANSI_SYNOPSIS
-#include <tr_ctype.h>
+#include <math_ctype.h>
 int isxdigit(int <[c]>);
 
 TRAD_SYNOPSIS
-#include <tr_ctype.h>
+#include <math_ctype.h>
 int isxdigit(int <[c]>);
 
 DESCRIPTION
@@ -39,7 +39,7 @@ No supporting OS subroutines are required.
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_isxdigit(char c)
+xbool_t ctype_isxdigit(char c)
 {
-    return ((_ctype_ + 1)[c] & (_X | _N)) != 0 ? true : false;
+    return ((_ctype_ + 1)[(xint8_t)c] & (_X | _N)) != 0 ? XTRUE : XFALSE;
 }

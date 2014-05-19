@@ -3,7 +3,7 @@
 
 /* convert double to string.  Helper for sprintf. */
 
-static int copystring(wchar* buf,int maxlen, const wchar* s) {
+static int copystring(xwchar_t* buf,int maxlen, const xwchar_t* s) {
   int i;
   for (i=0; i<3&&i<maxlen; ++i)
     buf[i]=s[i];
@@ -11,10 +11,10 @@ static int copystring(wchar* buf,int maxlen, const wchar* s) {
   return i;
 }
 
-int __dtowcs(double d,wchar *buf,unsigned int maxlen,unsigned int prec,unsigned int prec2,int g) {
-  wchar wcs_inf[] = {'i', 'n', 'f', '\0'};
-  wchar wcs_nan[] = {'n', 'a', 'n', '\0'};
-  wchar wcs__inf[] = {'-', 'i', 'n', 'f', '\0'};
+int __dtowcs(double d,xwchar_t *buf,unsigned int maxlen,unsigned int prec,unsigned int prec2,int g) {
+  xwchar_t wcs_inf[] = {'i', 'n', 'f', '\0'};
+  xwchar_t wcs_nan[] = {'n', 'a', 'n', '\0'};
+  xwchar_t wcs__inf[] = {'-', 'i', 'n', 'f', '\0'};
 
   union {
     unsigned long long l;
@@ -29,17 +29,17 @@ int __dtowcs(double d,wchar *buf,unsigned int maxlen,unsigned int prec,unsigned 
   unsigned int i;
   double backup=d;
   double tmp;
-  wchar *oldbuf=buf;
+  xwchar_t *oldbuf=buf;
 
   if ((i=isinf(d))) return copystring(buf,maxlen,i>0?wcs_inf:wcs__inf);
   if (isnan(d)) return copystring(buf,maxlen,wcs_nan);
   e10=1+(long)(e*0.30102999566398119802); /* log10(2) */
   /* Wir iterieren von Links bis wir bei 0 sind oder maxlen erreicht
    * ist.  Wenn maxlen erreicht ist, machen wir das nochmal in
-   * scientific notation.  Wenn dann von prec noch was übrig ist, geben
+   * scientific notation.  Wenn dann von prec noch was Ã¼brig ist, geben
    * wir einen Dezimalpunkt aus und geben prec2 Nachkommastellen aus.
    * Wenn prec2 Null ist, geben wir so viel Stellen aus, wie von prec
-   * noch übrig ist. */
+   * noch Ã¼brig ist. */
   if (d==0.0) {
     prec2=prec2==0?1:prec2+2;
     prec2=prec2>maxlen?8:prec2;
@@ -75,37 +75,37 @@ int __dtowcs(double d,wchar *buf,unsigned int maxlen,unsigned int prec,unsigned 
     while (tmp>0.9) {
       char digit;
       double fraction=d/tmp;
-	digit=(int)(fraction);		/* floor() */
+    digit=(int)(fraction);		/* floor() */
       if (!first || digit) {
-	first=0;
-	*buf=digit+L'0'; ++buf;
-	if (!maxlen) {
-	  /* use scientific notation */
-	  int len=__dtowcs(backup/tmp,oldbuf,maxlen,prec,prec2,0);
-	  int initial=1;
-	  if (len==0) return 0;
-	  maxlen-=len; buf+=len;
-	  if (maxlen>0) {
-	    *buf=L'e';
-	    ++buf;
-	  }
-	  --maxlen;
-	  for (len=1000; len>0; len/=10) {
-	    if (e10>=len || !initial) {
-	      if (maxlen>0) {
-		*buf=(e10/len)+L'0';
-		++buf;
-	      }
-	      --maxlen;
-	      initial=0;
-	      e10=e10%len;
-	    }
-	  }
-	  if (maxlen>0) goto fini;
-	  return 0;
-	}
-	d-=digit*tmp;
-	--maxlen;
+    first=0;
+    *buf=digit+L'0'; ++buf;
+    if (!maxlen) {
+      /* use scientific notation */
+      int len=__dtowcs(backup/tmp,oldbuf,maxlen,prec,prec2,0);
+      int initial=1;
+      if (len==0) return 0;
+      maxlen-=len; buf+=len;
+      if (maxlen>0) {
+        *buf=L'e';
+        ++buf;
+      }
+      --maxlen;
+      for (len=1000; len>0; len/=10) {
+        if (e10>=len || !initial) {
+          if (maxlen>0) {
+        *buf=(e10/len)+L'0';
+        ++buf;
+          }
+          --maxlen;
+          initial=0;
+          e10=e10%len;
+        }
+      }
+      if (maxlen>0) goto fini;
+      return 0;
+    }
+    d-=digit*tmp;
+    --maxlen;
       }
       tmp/=10.0;
     }

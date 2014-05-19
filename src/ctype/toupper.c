@@ -49,7 +49,7 @@ No supporting OS subroutines are required.
 
 #include "../include/ctype.h"
 
-char tr_toupper(char c)
+char ctype_toupper(char c)
 {
     return islower(c) ? c - 'a' + 'A' : c;
 }

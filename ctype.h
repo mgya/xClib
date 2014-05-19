@@ -1,72 +1,72 @@
-﻿#ifndef _CTYPE_H_
+#ifndef _CTYPE_H_
 #define _CTYPE_H_
 
-#include "../system/character.h"
-#include "../system/boolean.h"
+#include <xC/xcharacter.h>
+#include <xC/xboolean.h>
 
-#define isalnum(c)      tr_isalnum(c)
-#define isalpha(c)      tr_isalpha(c)
-#define isblank(c)      tr_isblank(c)
-#define iscntrl(c)      tr_iscntrl(c)
-#define isdigit(c)      tr_isdigit(c)
-#define isgraph(c)      tr_isgraph(c)
-#define islower(c)      tr_islower(c)
-#define isprint(c)      tr_isprint(c)
-#define ispunct(c)      tr_ispunct(c)
-#define isspace(c)      tr_isspace(c)
-#define isupper(c)      tr_isupper(c)
-#define isxdigit(c)     tr_isxdigit(c)
-#define tolower(c)      tr_tolower(c)
-#define toupper(c)      tr_toupper(c)
+#define isalnum(c)      ctype_isalnum(c)
+#define isalpha(c)      ctype_isalpha(c)
+#define isblank(c)      ctype_isblank(c)
+#define iscntrl(c)      ctype_iscntrl(c)
+#define isdigit(c)      ctype_isdigit(c)
+#define isgraph(c)      ctype_isgraph(c)
+#define islower(c)      ctype_islower(c)
+#define isprint(c)      ctype_isprint(c)
+#define ispunct(c)      ctype_ispunct(c)
+#define isspace(c)      ctype_isspace(c)
+#define isupper(c)      ctype_isupper(c)
+#define isxdigit(c)     ctype_isxdigit(c)
+#define tolower(c)      ctype_tolower(c)
+#define toupper(c)      ctype_toupper(c)
 
-#define iswalnum(w)     tr_iswalnum(w)
-#define iswalpha(w)     tr_iswalpha(w)
-#define iswblank(w)     tr_iswblank(w)
-#define iswcntrl(w)     tr_iswcntrl(w)
-#define iswdigit(w)     tr_iswdigit(w)
-#define iswgraph(w)     tr_iswgraph(w)
-#define iswlower(w)     tr_iswlower(w)
-#define iswprint(w)     tr_iswprint(w)
-#define iswpunct(w)     tr_iswpunct(w)
-#define iswspace(w)     tr_iswspace(w)
-#define iswupper(w)     tr_iswupper(w)
-#define iswxdigit(w)    tr_iswxdigit(w)
-#define towlower(w)     tr_towlower(w)
-#define towupper(w)     tr_towupper(w)
+#define iswalnum(w)     ctype_iswalnum(w)
+#define iswalpha(w)     ctype_iswalpha(w)
+#define iswblank(w)     ctype_iswblank(w)
+#define iswcntrl(w)     ctype_iswcntrl(w)
+#define iswdigit(w)     ctype_iswdigit(w)
+#define iswgraph(w)     ctype_iswgraph(w)
+#define iswlower(w)     ctype_iswlower(w)
+#define iswprint(w)     ctype_iswprint(w)
+#define iswpunct(w)     ctype_iswpunct(w)
+#define iswspace(w)     ctype_iswspace(w)
+#define iswupper(w)     ctype_iswupper(w)
+#define iswxdigit(w)    ctype_iswxdigit(w)
+#define towlower(w)     ctype_towlower(w)
+#define towupper(w)     ctype_towupper(w)
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-bool tr_isalnum(char);
-bool tr_isalpha(char);
-bool tr_isblank(char);
-bool tr_iscntrl(char);
-bool tr_isdigit(char);
-bool tr_isgraph(char);
-bool tr_islower(char);
-bool tr_isprint(char);
-bool tr_ispunct(char);
-bool tr_isspace(char);
-bool tr_isupper(char);
-bool tr_isxdigit(char);
-char tr_tolower(char);
-char tr_toupper(char);
+xbool_t ctype_isalnum(char);
+xbool_t ctype_isalpha(char);
+xbool_t ctype_isblank(char);
+xbool_t ctype_iscntrl(char);
+xbool_t ctype_isdigit(char);
+xbool_t ctype_isgraph(char);
+xbool_t ctype_islower(char);
+xbool_t ctype_isprint(char);
+xbool_t ctype_ispunct(char);
+xbool_t ctype_isspace(char);
+xbool_t ctype_isupper(char);
+xbool_t ctype_isxdigit(char);
+char ctype_tolower(char);
+char ctype_toupper(char);
 
-bool tr_iswalnum(wchar);
-bool tr_iswalpha(wchar);
-bool tr_iswblank(wchar);
-bool tr_iswcntrl(wchar);
-bool tr_iswdigit(wchar);
-bool tr_iswgraph(wchar);
-bool tr_iswlower(wchar);
-bool tr_iswprint(wchar);
-bool tr_iswpunct(wchar);
-bool tr_iswspace(wchar);
-bool tr_iswupper(wchar);
-bool tr_iswxdigit(wchar);
-wchar tr_towlower(wchar);
-wchar tr_towupper(wchar);
+xbool_t ctype_iswalnum(xwchar_t);
+xbool_t ctype_iswalpha(xwchar_t);
+xbool_t ctype_iswblank(xwchar_t);
+xbool_t ctype_iswcntrl(xwchar_t);
+xbool_t ctype_iswdigit(xwchar_t);
+xbool_t ctype_iswgraph(xwchar_t);
+xbool_t ctype_iswlower(xwchar_t);
+xbool_t ctype_iswprint(xwchar_t);
+xbool_t ctype_iswpunct(xwchar_t);
+xbool_t ctype_iswspace(xwchar_t);
+xbool_t ctype_iswupper(xwchar_t);
+xbool_t ctype_iswxdigit(xwchar_t);
+xwchar_t ctype_towlower(xwchar_t);
+xwchar_t ctype_towupper(xwchar_t);
 
 #ifdef __cplusplus
 }

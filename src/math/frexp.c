@@ -4,9 +4,9 @@
 static const double
 two54 =  1.80143985094819840000e+16; /* 0x43500000, 0x00000000 */
 
-double tr_frexp(double x, int * eptr)
+double math_frexp(double x, int * eptr)
 {
-    int32_t hx, ix, lx;
+    xint32_t hx, ix, lx;
     EXTRACT_WORDS(hx,lx,x);
     ix = 0x7fffffff&hx;
     *eptr = 0;

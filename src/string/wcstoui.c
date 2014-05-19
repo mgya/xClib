@@ -1,11 +1,11 @@
 #include "../../string.h"
 #include "../../ctype.h"
 
-unsigned int tr_wcstoui(const wchar * nptr, wchar ** endptr, int base)
+unsigned int string_wcstoui(const xwchar_t * nptr, xwchar_t ** endptr, int base)
 {
-    register const wchar * s = nptr;
+    register const xwchar_t * s = nptr;
     register unsigned int acc;
-    register wchar c;
+    register xwchar_t c;
     register unsigned int cutoff;
     register int neg = 0, any, cutlim;
 
@@ -26,8 +26,8 @@ unsigned int tr_wcstoui(const wchar * nptr, wchar ** endptr, int base)
     if (base == 0)
     	base = c == L'0' ? 8 : 10;
 
-    cutoff = (unsigned int)UINT32_MAX / (unsigned int)base;
-    cutlim = (int)((unsigned int)UINT32_MAX % (unsigned int)base);
+    cutoff = (unsigned int)XUINT32_MAX / (unsigned int)base;
+    cutlim = (int)((unsigned int)XUINT32_MAX % (unsigned int)base);
     for (acc = 0, any = 0;; c = *s++) {
     	if (iswdigit(c))
     	    c -= L'0';
@@ -46,10 +46,10 @@ unsigned int tr_wcstoui(const wchar * nptr, wchar ** endptr, int base)
     	}
     }
     if (any < 0) {
-    	acc = UINT32_MAX;
+    	acc = XUINT32_MAX;
     } else if (neg)
-    	acc = (unsigned int)(-(int64_t)acc);
+    	acc = (unsigned int)(-(xint64_t)acc);
     if (endptr != 0)
-    	*endptr = (wchar *) (any ? s - 1 : nptr);
+    	*endptr = (xwchar_t *) (any ? s - 1 : nptr);
     return (acc);
 }

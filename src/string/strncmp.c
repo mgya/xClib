@@ -7,14 +7,14 @@ INDEX
 
 ANSI_SYNOPSIS
     #include <string.h>
-    int tr_strncmp(const char *<[a]>, const char * <[b]>, size_t <[length]>);
+    int string_strncmp(const char *<[a]>, const char * <[b]>, xsize_t <[length]>);
 
 TRAD_SYNOPSIS
     #include <string.h>
-    int tr_strncmp(<[a]>, <[b]>, <[length]>)
+    int string_strncmp(<[a]>, <[b]>, <[length]>)
     char *<[a]>;
     char *<[b]>;
-    size_t <[length]>
+    xsize_t <[length]>
 
 DESCRIPTION
     <<strncmp>> compares up to <[length]> characters
@@ -38,7 +38,7 @@ QUICKREF
 
 #include "../../string.h"
 
-int tr_strncmp(const char * s1, const char * s2, size_t n)
+int string_strncmp(const char * s1, const char * s2, xsize_t n)
 {
     if (n == 0)
     	return 0;

@@ -39,7 +39,7 @@ No supporting OS subroutines are required.
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_isdigit(char c)
+xbool_t ctype_isdigit(char c)
 {
-    return ((_ctype_ + 1)[c] & _N) != 0 ? true : false;
+    return ((_ctype_ + 1)[(xint8_t)c] & _N) != 0 ? XTRUE : XFALSE;
 }

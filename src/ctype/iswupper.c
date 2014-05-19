@@ -33,7 +33,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswupper(wchar c)
+xbool_t ctype_iswupper(xwchar_t c)
 {
     return towlower(c) != c;
 }

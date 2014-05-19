@@ -1,18 +1,18 @@
 #ifndef _FDLIBM_H_
 #define _FDLIBM_H_
 
-#include "../../../system/integer.h"
+#include <xC/xinteger.h>
 
 double expm1(double);
 double copysign(double, double);
 double scalbn(double, int);
 int finite(double);
 double nan(const char *);
-int32_t rem_pio2(double, double *);
+xint32_t rem_pio2(double, double *);
 double kernel_sin(double, double, int);
 double kernel_cos(double, double);
 double kernel_tan(double, double, int);
-int kernel_rem_pio2(double *, double *, int, int, int, const int32_t *);
+int kernel_rem_pio2(double *, double *, int, int, int, const xint32_t *);
 
 #ifndef __BIG_ENDIAN
 #ifndef __LITTLE_ENDIAN
@@ -31,13 +31,13 @@ ints.  */
 
 #ifdef __BIG_ENDIAN
 
-typedef union 
+typedef union
 {
     double value;
-    struct 
+    struct
     {
-    	uint32_t msw;
-    	uint32_t lsw;
+        xuint32_t msw;
+        xuint32_t lsw;
     } parts;
 } ieee_double_shape_type;
 
@@ -45,13 +45,13 @@ typedef union
 
 #ifdef __LITTLE_ENDIAN
 
-typedef union 
+typedef union
 {
     double value;
-    struct 
+    struct
     {
-    	uint32_t lsw;
-    	uint32_t msw;
+        xuint32_t lsw;
+        xuint32_t msw;
     } parts;
 } ieee_double_shape_type;
 
@@ -121,7 +121,7 @@ int.  */
 typedef union
 {
     float value;
-    uint32_t word;
+    xuint32_t word;
 } ieee_float_shape_type;
 
 /* Get a 32 bit int from a float.  */

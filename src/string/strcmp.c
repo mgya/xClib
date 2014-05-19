@@ -7,11 +7,11 @@ INDEX
 
 ANSI_SYNOPSIS
     #include <string.h>
-    int tr_strcmp(const char *<[a]>, const char *<[b]>);
+    int string_strcmp(const char *<[a]>, const char *<[b]>);
 
 TRAD_SYNOPSIS
     #include <string.h>
-    int tr_strcmp(<[a]>, <[b]>)
+    int string_strcmp(<[a]>, <[b]>)
     char *<[a]>;
     char *<[b]>;
 
@@ -37,7 +37,7 @@ QUICKREF
 
 #include "../../string.h"
 
-int tr_strcmp(const char * s1, const char * s2)
+int string_strcmp(const char * s1, const char * s2)
 { 
     while (*s1 != '\0' && *s1 == *s2)
     {

@@ -3,14 +3,14 @@ FUNCTION
     <<wcsncpy>>---copy part of a wide-character string 
 
 ANSI_SYNOPSIS
-    #include <wchar.h>
-    wchar *tr_wcsncpy(wchar *<[s1]>, const wchar *<[s2]>, size_t <[n]>);
+    #include <xwchar_t.h>
+    xwchar_t *string_wcsncpy(xwchar_t *<[s1]>, const xwchar_t *<[s2]>, xsize_t <[n]>);
 
 TRAD_SYNOPSIS
-    wchar *tr_wcsncpy(<[s1]>, <[s2]>, <[n]>
-    wchar *<[s1]>;
-    const wchar *<[s2]>;
-    size_t <[n]>;
+    xwchar_t *string_wcsncpy(<[s1]>, <[s2]>, <[n]>
+    xwchar_t *<[s1]>;
+    const xwchar_t *<[s2]>;
+    xsize_t <[n]>;
 
 DESCRIPTION
     The <<wcsncpy>> function copies not more than n wide-character codes
@@ -66,10 +66,10 @@ No supporting OS subroutines are required.
 
 #include "../../string.h"
 
-wchar * tr_wcsncpy(wchar * dst0, const wchar * src0, size_t count)
+xwchar_t * string_wcsncpy(xwchar_t * dst0, const xwchar_t * src0, xsize_t count)
 {
-    wchar * dscan = dst0;
-    const wchar * sscan = src0;
+    xwchar_t * dscan = dst0;
+    const xwchar_t * sscan = src0;
 
     while (count > 0)
     {

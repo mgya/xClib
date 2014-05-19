@@ -3,15 +3,15 @@ FUNCTION
     <<strchr>>---search for character in string
 
 INDEX
-    tr_strchr
+    string_strchr
 
 ANSI_SYNOPSIS
     #include <string.h>
-    char * tr_strchr(const char *<[string]>, int <[c]>);
+    char * string_strchr(const char *<[string]>, int <[c]>);
 
 TRAD_SYNOPSIS
     #include <string.h>
-    char * tr_strchr(<[string]>, <[c]>);
+    char * string_strchr(<[string]>, <[c]>);
     const char *<[string]>;
     int <[c]>;
 
@@ -35,18 +35,18 @@ QUICKREF
 
 #include "../../string.h"
 
-const char * tr_strchr(const char * s1, char c)
+char * string_strchr(const char * s1, char c)
 {
     const char * p = s1;
 
     do
     {
-    	if (*p == c)
-    	{
-    	    /* LINTED interface specification */
-    	    return p;
-    	}
+        if (*p == c)
+        {
+            /* LINTED interface specification */
+            return (char *)p;
+        }
     } while (*p++);
 
-    return NULL;
+    return XNULL;
 }

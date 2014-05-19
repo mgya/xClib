@@ -1,15 +1,15 @@
 /*
 FUNCTION
-    <<wcsstr>>---find a wide-character substring 
+    <<wcsstr>>---find a wide-character substring
 
 ANSI_SYNOPSIS
-    #include <wchar.h>
-    wchar *wcsstr(const wchar *<[big]>, const wchar *<[little]>);
+    #include <xwchar_t.h>
+    xwchar_t *wcsstr(const xwchar_t *<[big]>, const xwchar_t *<[little]>);
 
 TRAD_SYNOPSIS
-    wchar *wcsstr(<[big]>, <[little]>
-    const wchar *<[big]>;
-    const wchar *<[little]>;
+    xwchar_t *wcsstr(<[big]>, <[little]>
+    const xwchar_t *<[big]>;
+    const xwchar_t *<[little]>;
 
 DESCRIPTION
     The <<wcsstr>> function locates the first occurrence in the
@@ -62,37 +62,37 @@ PORTABILITY
 
 #include "../../string.h"
 
-const wchar * tr_wcsstr(const wchar * searchee, const wchar * lookfor)
+xwchar_t * string_wcsstr(const xwchar_t * searchee, const xwchar_t * lookfor)
 {
     if (*searchee == L'\0')
     {
-    	if (*lookfor)
-    	    return NULL;
+        if (*lookfor)
+            return XNULL;
 
-    	return searchee;
+        return (xwchar_t *)searchee;
     }
 
     while (*searchee)
     {
-    	size_t i = 0;
+        xsize_t i = 0;
 
-    	while (1)
-    	{
-    	    if (lookfor[i] == L'\0')
-    	    {
-    	    	return searchee;
-    	    }
+        while (1)
+        {
+            if (lookfor[i] == L'\0')
+            {
+                return (xwchar_t *)searchee;
+            }
 
-    	    if (lookfor[i] != searchee[i])
-    	    {
-    	    	break;
-    	    }
+            if (lookfor[i] != searchee[i])
+            {
+                break;
+            }
 
-    	    ++i;
-    	}
+            ++i;
+        }
 
-    	++searchee;
+        ++searchee;
     }
 
-    return NULL;
+    return XNULL;
 }

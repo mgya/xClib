@@ -1,8 +1,8 @@
 #include "../../string.h"
 #include "../../ctype.h"
 
-double tr_wcstod(const wchar* s, wchar** endptr) {
-    register const wchar*  p     = s;
+double string_wcstod(const xwchar_t* s, xwchar_t** endptr) {
+    register const xwchar_t*  p     = s;
     register long double  value = 0.L;
     int                   sign  = +1;
     long double           factor;
@@ -58,8 +58,8 @@ double tr_wcstod(const wchar* s, wchar** endptr) {
     }
 
 done:
-    if ( endptr != NULL )
-        *endptr = (wchar*)p;
+    if ( endptr != XNULL )
+        *endptr = (xwchar_t*)p;
 
     return value * sign;
 }

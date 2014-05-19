@@ -33,7 +33,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswxdigit(wchar c)
+xbool_t ctype_iswxdigit(xwchar_t c)
 {
-    return c < 0x100 ? isxdigit((char)c) : false;
+    return c < 0x100 ? isxdigit((char)c) : XFALSE;
 }

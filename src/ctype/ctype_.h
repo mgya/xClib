@@ -3,8 +3,8 @@
     version : 0.1
 */
 
-#ifndef _CTYPE_IMP_H_ 
-#define _CTYPE__IMP_H_
+#ifndef _CTYPE_IMP_H_
+#define _CTYPE_IMP_H_
 
 #define    _U    01
 #define    _L    02

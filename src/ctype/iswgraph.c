@@ -63,7 +63,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswgraph(wchar c)
+xbool_t ctype_iswgraph(xwchar_t c)
 {
     return iswprint(c) && !iswspace(c);
 }

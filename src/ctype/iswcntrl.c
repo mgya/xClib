@@ -63,7 +63,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswcntrl(wchar c)
+xbool_t ctype_iswcntrl(xwchar_t c)
 {
-    return c < 0x100 ? iscntrl((char)c) : false;
+    return c < 0x100 ? iscntrl((char)c) : XFALSE;
 }

@@ -3,11 +3,11 @@
 
 static const double one = 1.0, half=0.5, vchuge = 1.0e300;//qubing fix for error:'huge' is an obsolete keyword
 
-double tr_cosh(double x)
+double math_cosh(double x)
 {    
     double t,w;
-    int32_t ix;
-    uint32_t lx;
+    xint32_t ix;
+    xuint32_t lx;
 
     /* High word of |x|. */
     GET_HIGH_WORD(ix,x);
@@ -36,7 +36,7 @@ double tr_cosh(double x)
     /* |x| in [log(maxdouble), overflowthresold] */
     GET_LOW_WORD(lx,x);
     if (ix<0x408633CE || 
-             (ix==0x408633ce && lx<=(uint32_t)0x8fb9f87d)) {
+             (ix==0x408633ce && lx<=(xuint32_t)0x8fb9f87d)) {
         w = exp(half*fabs(x));
         t = half*w;
         return t*w;

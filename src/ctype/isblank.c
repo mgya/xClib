@@ -34,7 +34,7 @@ RETURNS
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_isblank(char c)
+xbool_t ctype_isblank(char c)
 {
     return c == ' ' || c == '\t';
 }

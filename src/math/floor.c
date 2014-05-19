@@ -3,10 +3,10 @@
 
 static const double vchuge = 1.0e300;//qubing fix for error:'huge' is an obsolete keyword
 
-double tr_floor(double x)
+double math_floor(double x)
 {
-    int32_t i0,i1,j0;
-    uint32_t i,j;
+    xint32_t i0,i1,j0;
+    xuint32_t i,j;
     EXTRACT_WORDS(i0,i1,x);
     j0 = ((i0>>20)&0x7ff)-0x3ff;
     if(j0<20) {
@@ -30,7 +30,7 @@ double tr_floor(double x)
     	if(j0==0x400) return x+x;    /* inf or NaN */
     	else return x;    	/* x is integral */
     } else {
-    	i = ((uint32_t)(0xffffffff))>>(j0-20);
+    	i = ((xuint32_t)(0xffffffff))>>(j0-20);
     	if((i1&i)==0) return x;    /* x is integral */
     	//qubing fix for error:'huge' is an obsolete keyword
     	if(vchuge+x>0.0) {     	/* raise inexact flag */
@@ -38,7 +38,7 @@ double tr_floor(double x)
     	    	if(j0==20) i0+=1; 
     	    	else {
     	    	    j = i1+(1<<(52-j0));
-    	    	    if(j<(uint32_t)i1) i0 +=1 ;     /* got a carry */
+    	    	    if(j<(xuint32_t)i1) i0 +=1 ;     /* got a carry */
     	    	    i1=j;
     	    	}
     	    }

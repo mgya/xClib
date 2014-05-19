@@ -1,7 +1,7 @@
 #include "../../string.h"
 #include "../../ctype.h"
 
-int tr_wcsnicmp(const wchar * s1, const wchar * s2, size_t n)
+int string_wcsnicmp(const xwchar_t * s1, const xwchar_t * s2, xsize_t n)
 {
     if (n == 0)
     	return 0;

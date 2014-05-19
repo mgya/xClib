@@ -1,11 +1,11 @@
 #include "../../string.h"
-#include "../../../system/memory.h"
+#include <xC/xmemory.h>
 
-wchar * tr_wcsdup(const wchar * str)
+xwchar_t * string_wcsdup(const xwchar_t * str)
 {
-  wchar * puf = (wchar *)malloc(wcslen(str));
+  xwchar_t * puf = (xwchar_t *)xmemory_alloc(wcslen(str));
 
-  if (NULL == puf)
+  if (XNULL == puf)
   {
       return puf;
   }

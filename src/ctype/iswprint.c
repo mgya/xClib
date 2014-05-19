@@ -63,7 +63,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswprint(wchar c)
+xbool_t ctype_iswprint(xwchar_t c)
 {
-    return c < 0x100 ? isprint((char)c) : false;
+    return c < 0x100 ? isprint((char)c) : XFALSE;
 }

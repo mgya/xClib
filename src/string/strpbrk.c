@@ -1,6 +1,6 @@
 #include "../../string.h"
 
-char * tr_strpbrk (const char * s, const char * accept)
+char * string_strpbrk (const char * s, const char * accept)
 {
     while (*s != '\0')
     {
@@ -11,6 +11,6 @@ char * tr_strpbrk (const char * s, const char * accept)
     	++s;
     }
     
-    return NULL;
+    return XNULL;
 }
 

@@ -3,11 +3,11 @@
 
 static const double one = 1.0, shuge = 1.0e307;
 
-double tr_sinh(double x)
+double math_sinh(double x)
 {    
     double t,w,h;
-    int32_t ix,jx;
-    uint32_t lx;
+    xint32_t ix,jx;
+    xuint32_t lx;
 
     /* High word of |x|. */
     GET_HIGH_WORD(jx,x);
@@ -32,7 +32,7 @@ double tr_sinh(double x)
 
     /* |x| in [log(maxdouble), overflowthresold] */
     GET_LOW_WORD(lx,x);
-    if (ix<0x408633CE || (ix==0x408633ce && lx<=(uint32_t)0x8fb9f87d)) {
+    if (ix<0x408633CE || (ix==0x408633ce && lx<=(xuint32_t)0x8fb9f87d)) {
     	w = exp(0.5*fabs(x));
     	t = h*w;
     	return t*w;

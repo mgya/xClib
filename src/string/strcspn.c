@@ -3,13 +3,13 @@ FUNCTION
     <<strcspn>>---count characters not in string
 
 INDEX
-    tr_strcspn
+    string_strcspn
 
 ANSI_SYNOPSIS
-    size_t tr_strcspn(const char *<[s1]>, const char *<[s2]>);
+    xsize_t string_strcspn(const char *<[s1]>, const char *<[s2]>);
 
 TRAD_SYNOPSIS
-    size_t tr_strcspn(<[s1]>, <[s2]>)
+    xsize_t string_strcspn(<[s1]>, <[s2]>)
     char *<[s1]>;
     char *<[s2]>;
 
@@ -30,7 +30,7 @@ PORTABILITY
 
 #include "../../string.h"
 
-size_t tr_strcspn(const char * s1, const char * s2)
+xsize_t string_strcspn(const char * s1, const char * s2)
 {
     const char * s = s1;
     const char * c;

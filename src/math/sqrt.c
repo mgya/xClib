@@ -3,32 +3,32 @@
 
 static    const double    one    = 1.0, tiny=1.0e-300;
 
-double tr_sqrt(double x)
+double math_sqrt(double x)
 {
     double z;
-    int32_t sign = (int)0x80000000; 
-    uint32_t r,t1,s1,ix1,q1;
-    int32_t ix0,s0,q,m,t,i;
+    xint32_t sign = (int)0x80000000;
+    xuint32_t r,t1,s1,ix1,q1;
+    xint32_t ix0,s0,q,m,t,i;
 
     EXTRACT_WORDS(ix0,ix1,x);
 
     /* take care of Inf and NaN */
-    if((ix0&0x7ff00000)==0x7ff00000) {    	    
+    if((ix0&0x7ff00000)==0x7ff00000) {
         return x*x+x;    	/* sqrt(NaN)=NaN, sqrt(+inf)=+inf
-    	    	       sqrt(-inf)=sNaN */
-    } 
+                       sqrt(-inf)=sNaN */
+    }
     /* take care of zero */
     if(ix0<=0) {
         if(((ix0&(~sign))|ix1)==0) return x;/* sqrt(+-0) = +-0 */
         else if(ix0<0)
-    	return (x-x)/(x-x);    	/* sqrt(-ve) = sNaN */
+        return (x-x)/(x-x);    	/* sqrt(-ve) = sNaN */
     }
     /* normalize x */
     m = (ix0>>20);
     if(m==0) {    	    	/* subnormal x */
         while(ix0==0) {
-    	m -= 21;
-    	ix0 |= (ix1>>11); ix1 <<= 21;
+        m -= 21;
+        ix0 |= (ix1>>11); ix1 <<= 21;
         }
         for(i=0;(ix0&0x00100000)==0;i++) ix0<<=1;
         m -= i-1;
@@ -50,12 +50,12 @@ double tr_sqrt(double x)
     r = 0x00200000;    	/* r = moving bit from right to left */
 
     while(r!=0) {
-        t = s0+r; 
-        if(t<=ix0) { 
-    	s0   = t+r; 
-    	ix0 -= t; 
-    	q   += r; 
-        } 
+        t = s0+r;
+        if(t<=ix0) {
+        s0   = t+r;
+        ix0 -= t;
+        q   += r;
+        }
         ix0 += ix0 + ((ix1&sign)>>31);
         ix1 += ix1;
         r>>=1;
@@ -63,15 +63,15 @@ double tr_sqrt(double x)
 
     r = sign;
     while(r!=0) {
-        t1 = s1+r; 
+        t1 = s1+r;
         t  = s0;
-        if((t<ix0)||((t==ix0)&&(t1<=ix1))) { 
-    	s1  = t1+r;
-    	if(((t1&sign)==sign)&&(s1&sign)==0) s0 += 1;
-    	ix0 -= t;
-    	if (ix1 < t1) ix0 -= 1;
-    	ix1 -= t1;
-    	q1  += r;
+        if((t<ix0)||((t==ix0)&&(t1<=ix1))) {
+        s1  = t1+r;
+        if(((t1&sign)==(xuint32_t)sign)&&(s1&sign)==0) s0 += 1;
+        ix0 -= t;
+        if (ix1 < t1) ix0 -= 1;
+        ix1 -= t1;
+        q1  += r;
         }
         ix0 += ix0 + ((ix1&sign)>>31);
         ix1 += ix1;
@@ -83,11 +83,11 @@ double tr_sqrt(double x)
         z = one-tiny; /* trigger inexact flag */
         if (z>=one) {
             z = one+tiny;
-            if (q1==(uint32_t)0xffffffff) { q1=0; q += 1;}
-    	else if (z>one) {
-    	    if (q1==(uint32_t)0xfffffffe) q+=1;
-    	    q1+=2; 
-    	} else
+            if (q1==(xuint32_t)0xffffffff) { q1=0; q += 1;}
+        else if (z>one) {
+            if (q1==(xuint32_t)0xfffffffe) q+=1;
+            q1+=2;
+        } else
                 q1 += (q1&1);
         }
     }

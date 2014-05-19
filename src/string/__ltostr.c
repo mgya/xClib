@@ -1,5 +1,5 @@
 #include "../../string.h"
-#include "../../../system/memory.h"
+#include <xC/xmemory.h>
 #include "./printf_.h"
 
 int __ltostr(char *s, unsigned int size, unsigned long i, unsigned int base, int UpCase)
@@ -27,7 +27,7 @@ int __ltostr(char *s, unsigned int size, unsigned long i, unsigned int base, int
     i=i/base;
     j++;
   }
-  memmove(s,tmp,j+1);
+  xmemory_move(s,tmp,j+1);
 
   return j;
 }

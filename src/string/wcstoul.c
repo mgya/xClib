@@ -1,12 +1,12 @@
 #include "../../string.h"
 #include "../../ctype.h"
 
-uint64_t tr_wcstoul(const wchar * nptr, wchar ** endptr, int base)
+xuint64_t string_wcstoul(const xwchar_t * nptr, xwchar_t ** endptr, int base)
 {
-    register const wchar * s = nptr;
-    register uint64_t acc;
-    register wchar c;
-    register uint64_t cutoff;
+    register const xwchar_t * s = nptr;
+    register xuint64_t acc;
+    register xwchar_t c;
+    register xuint64_t cutoff;
     register int neg = 0, any, cutlim;
 
     do {
@@ -26,8 +26,8 @@ uint64_t tr_wcstoul(const wchar * nptr, wchar ** endptr, int base)
     if (base == 0)
     	base = c == L'0' ? 8 : 10;
 
-    cutoff = (uint64_t)UINT64_MAX / (uint64_t)base;
-    cutlim = (int)((uint64_t)UINT64_MAX % (uint64_t)base);
+    cutoff = (xuint64_t)XUINT64_MAX / (xuint64_t)base;
+    cutlim = (int)((xuint64_t)XUINT64_MAX % (xuint64_t)base);
     for (acc = 0, any = 0;; c = *s++) {
     	if (iswdigit(c))
     	    c -= L'0';
@@ -46,10 +46,10 @@ uint64_t tr_wcstoul(const wchar * nptr, wchar ** endptr, int base)
     	}
     }
     if (any < 0) {
-    	acc = UINT64_MAX;
+    	acc = XUINT64_MAX;
     } else if (neg)
-    	acc = (uint64_t)(-(int64_t)acc);
+    	acc = (xuint64_t)(-(xint64_t)acc);
     if (endptr != 0)
-    	*endptr = (wchar *) (any ? s - 1 : nptr);
+    	*endptr = (xwchar_t *) (any ? s - 1 : nptr);
     return (acc);
 }

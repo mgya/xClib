@@ -50,7 +50,7 @@ No supporting OS subroutines are required.
 
 #include "../include/ctype.h"
 
-char tr_tolower(char c)
+char ctype_tolower(char c)
 {
     return isupper(c) ? c - 'A' + 'a' : c;
 }

@@ -3,12 +3,12 @@ FUNCTION
     <<wcscmp>>---compare two wide-character strings
 
 ANSI_SYNOPSIS
-    #include <wchar.h>
-    int tr_wcscmp(const wchar *<[s1]>, *<[s2]>);
+    #include <xwchar_t.h>
+    int string_wcscmp(const xwchar_t *<[s1]>, *<[s2]>);
 
 TRAD_SYNOPSIS
     int wcscmp(<[s1]>, <[s2]>
-    const wchar *<[s1]>, <[s2]>;
+    const xwchar_t *<[s1]>, <[s2]>;
 
 DESCRIPTION
     The <<wcscmp>> function compares the wide-character string pointed to
@@ -69,7 +69,7 @@ No supporting OS subroutines are required.
 /*
  * Compare strings.
  */
-int tr_wcscmp(const wchar * s1, const wchar * s2)
+int string_wcscmp(const xwchar_t * s1, const xwchar_t * s2)
 {
     while (*s1 != '\0' && *s1 == *s2)
     {

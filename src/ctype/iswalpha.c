@@ -63,7 +63,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswalpha(wchar c)
+xbool_t ctype_iswalpha(xwchar_t c)
 {
-    return c < (wchar)0x100 ? isalpha((char)c) : false;
+    return c < (xwchar_t)0x100 ? isalpha((char)c) : XFALSE;
 }

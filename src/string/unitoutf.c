@@ -1,9 +1,9 @@
 #include "../../string.h"
 
-size_t tr_unitoutf(const wchar * src, size_t len, char * dst, size_t n)
+xsize_t string_unitoutf(const xwchar_t * src, xsize_t len, char * dst, xsize_t n)
 {
-    size_t s = 0;
-    size_t d = 0;
+    xsize_t s = 0;
+    xsize_t d = 0;
 
     if (0 == len)
     {

@@ -64,7 +64,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-wchar tr_towupper(wchar c)
+xwchar_t ctype_towupper(xwchar_t c)
 {
-    return c < 0x00ff ? (wchar)toupper((char)c) : c;
+    return c < 0x00ff ? (xwchar_t)toupper((char)c) : c;
 }

@@ -7,11 +7,11 @@ INDEX
 
 ANSI_SYNOPSIS
     #include <string.h>
-    size_t tr_strspn(const char *<[s1]>, const char *<[s2]>);
+    xsize_t string_strspn(const char *<[s1]>, const char *<[s2]>);
 
 TRAD_SYNOPSIS
-    #include <tr_string.h>
-    size_t strspn(<[s1]>, <[s2]>)
+    #include <string_string.h>
+    xsize_t strspn(<[s1]>, <[s2]>)
     char *<[s1]>;
     char *<[s2]>;
 
@@ -35,7 +35,7 @@ QUICKREF
 
 #include "../../string.h"
 
-size_t tr_strspn(const char * s1, const char * s2)
+xsize_t string_strspn(const char * s1, const char * s2)
 {
     const char * s = s1;
     const char * c;

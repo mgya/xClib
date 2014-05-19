@@ -1,10 +1,10 @@
-#include "../../../system/varargsex.h"
+#include <xC/xvarargs.h>
 #include "../../string.h"
 #include "./printf_.h"
 
 #define MAX_WIDTH 10*1024
 
-static unsigned long skip_to(const wchar *format) {
+static unsigned long skip_to(const xwchar_t *format) {
   unsigned long nr;
   for (nr=0; format[nr] && (format[nr]!=L'%'); ++nr);
   return nr;
@@ -13,7 +13,7 @@ static unsigned long skip_to(const wchar *format) {
 #define A_WRITE(fn,buf,sz)    ((fn)->put((void*)(buf),(sz),(fn)->data))
 #define B_WRITE(fn,buf,sz)    { if ((unsigned long)(sz) > (((unsigned long)(int)(-1))>>1) || len+(int)(sz)<len) return -1; A_WRITE(fn,buf,sz); } while (0)
 
-static const wchar pad_line[2][16]= { {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '}, {'0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'}, };
+static const xwchar_t pad_line[2][16]= { {' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '}, {'0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0'}, };
 static int write_pad(unsigned int* dlen,struct arg_printf* fn, unsigned int len, int padwith) {
   int nr=0;
   if ((int)len<0 || *dlen+len<len) return -1;
@@ -27,7 +27,7 @@ static int write_pad(unsigned int* dlen,struct arg_printf* fn, unsigned int len,
   return 0;
 }
 
-int __v_wsprintf(struct arg_printf* fn, const wchar *format, va_list arg_ptr)
+int __v_wsprintf(struct arg_printf* fn, const xwchar_t *format, xva_list_t arg_ptr)
 {
   unsigned int len=0;
 
@@ -38,27 +38,27 @@ int __v_wsprintf(struct arg_printf* fn, const wchar *format, va_list arg_ptr)
       format+=sz;
     }
     if (*format==L'%') {
-      wchar buf[128];
-      union { wchar*s; } u_str;
+      xwchar_t buf[128];
+      union { xwchar_t*s; } u_str;
 #define s u_str.s
 
       int retval;
-      wchar ch, padwith=L' ', precpadwith=L' ';
+      xwchar_t ch, padwith=L' ', precpadwith=L' ';
 
-      wchar flag_in_sign=0;
-      wchar flag_upcase=0;
-      wchar flag_hash=0;
-      wchar flag_left=0;
-      wchar flag_space=0;
-      wchar flag_sign=0;
-      wchar flag_dot=0;
-      wchar flag_long=0;
+      xwchar_t flag_in_sign=0;
+      xwchar_t flag_upcase=0;
+      xwchar_t flag_hash=0;
+      xwchar_t flag_left=0;
+      xwchar_t flag_space=0;
+      xwchar_t flag_sign=0;
+      xwchar_t flag_dot=0;
+      xwchar_t flag_long=0;
 
       unsigned int base;
       unsigned int width=0, preci=0;
 
       long number=0;
-      int64_t llnumber=0;
+      xint64_t llnumber=0;
 
       ++format;
 inn_printf:
@@ -107,40 +107,40 @@ inn_printf:
       case L'8':
       case L'9':
     if(flag_dot) return -1;
-    width=wcstoui(format-1,(wchar**)&s,10);
+    width=wcstoui(format-1,(xwchar_t**)&s,10);
     if (width>MAX_WIDTH) return -1;
     if (ch==L'0' && !flag_left) padwith=L'0';
     format=s;
     goto inn_printf;
 
       case L'*':
-    width=va_arg(arg_ptr,int);
+    width=XVA_ARG(arg_ptr,int);
     if (width>MAX_WIDTH) return -1; /* width is unsiged, so this catches <0, too */
     goto inn_printf;
 
       case L'.':
     flag_dot=1;
     if (*format==L'*') {
-      int tmp=va_arg(arg_ptr,int);
+      int tmp=XVA_ARG(arg_ptr,int);
       preci=tmp<0?0:tmp;
       ++format;
     } else {
-      long int tmp=wcstoi(format,(wchar**)&s,10);
+      long int tmp=wcstoi(format,(xwchar_t**)&s,10);
       preci=tmp<0?0:tmp;
       format=s;
     }
     if (preci>MAX_WIDTH) return -1;
     goto inn_printf;
 
-      /* print a wchar or % */
+      /* print a xwchar_t or % */
       case L'c':
-    ch=(wchar)va_arg(arg_ptr,int);
+    ch=(xwchar_t)XVA_ARG(arg_ptr,int);
       case L'%':
     B_WRITE(fn,&ch,1); ++len;
     break;
       /* print a string */
       case L's':
-    s=va_arg(arg_ptr,wchar *);
+    s=XVA_ARG(arg_ptr,xwchar_t *);
     sz = (unsigned long)wcslen(s);
     if (flag_dot && sz>preci) sz=preci;
     preci=0;
@@ -149,7 +149,7 @@ inn_printf:
 
 print_out:
       {
-    wchar *sign=s;
+    xwchar_t *sign=s;
     int todo=0;
     
     if (! (width||preci) ) {
@@ -250,12 +250,12 @@ num_printf:
 
     if (flag_long>0) {
       if (flag_long>1)
-        llnumber=va_arg(arg_ptr,int64_t);
+        llnumber=XVA_ARG(arg_ptr,xint64_t);
       else
-        number=va_arg(arg_ptr,long);
+        number=XVA_ARG(arg_ptr,long);
     }
     else {
-      number=va_arg(arg_ptr,int);
+      number=XVA_ARG(arg_ptr,int);
       if (sizeof(int) != sizeof(long) && !flag_in_sign)
         number&=((unsigned int)-1);
     }
@@ -273,9 +273,9 @@ num_printf:
     if (flag_long<0) number&=0xffff;
     if (flag_long<-1) number&=0xff;
     if (flag_long>1)
-      retval = __lltowcs(s+sz,sizeof(buf)/sizeof(wchar)-5,(uint64_t) llnumber,base,flag_upcase);
+      retval = __lltowcs(s+sz,sizeof(buf)/sizeof(xwchar_t)-5,(xuint64_t) llnumber,base,flag_upcase);
     else
-      retval = __ltowcs(s+sz,sizeof(buf)/sizeof(wchar)-5,(unsigned long) number,base,flag_upcase);
+      retval = __ltowcs(s+sz,sizeof(buf)/sizeof(xwchar_t)-5,(unsigned long) number,base,flag_upcase);
 
     /* When 0 is printed with an explicit precision 0, the output is empty. */
     if (flag_dot && retval == 1 && s[sz] == L'0') {
@@ -302,16 +302,16 @@ num_printf:
       case L'g':
 	{
 	  int g=(ch==L'g');
-	  double d=va_arg(arg_ptr,double);
+	  double d=XVA_ARG(arg_ptr,double);
 	  s=buf+1;
 	  if (width==0) width=1;
 	  if (!flag_dot) preci=6;
 	  if (flag_sign || d < +0.0) flag_in_sign=1;
 
-	  sz=__dtowcs(d,s,sizeof(buf)/sizeof(wchar)-1,width,preci,g);
+	  sz=__dtowcs(d,s,sizeof(buf)/sizeof(xwchar_t)-1,width,preci,g);
 
 	  if (flag_dot) {
-	    wchar *tmp;
+	    xwchar_t *tmp;
 	    if ((tmp=wcschr(s,L'.'))) {
 	      if (preci || flag_hash) ++tmp;
 	      while (preci>0 && *++tmp) --preci;
@@ -323,7 +323,7 @@ num_printf:
 	  }
 
 	  if (g) {
-	    wchar *tmp,*tmp1;	/* boy, is _this_ ugly! */
+	    xwchar_t *tmp,*tmp1;	/* boy, is _this_ ugly! */
 	    if ((tmp=wcschr(s,L'.'))) {
 	      tmp1=wcschr(tmp,L'e');
 	      while (*tmp) ++tmp;

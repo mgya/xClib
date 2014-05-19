@@ -1,9 +1,9 @@
 #include "../../string.h"
 
-size_t tr_utftouni(const char * src, size_t len, wchar * dst, size_t n)
+xsize_t string_utftouni(const char * src, xsize_t len, xwchar_t * dst, xsize_t n)
 {
-    size_t s = 0;
-    size_t d = 0;
+    xsize_t s = 0;
+    xsize_t d = 0;
 
     if (0 == len)
     {
@@ -18,7 +18,7 @@ size_t tr_utftouni(const char * src, size_t len, wchar * dst, size_t n)
     	}
     	else if ((src[s] & 0x80) == 0) //bytes: 1; 0xxxxxxx
     	{
-    	    dst[d++] = (wchar)src[s++];
+    	    dst[d++] = (xwchar_t)src[s++];
     	} 
     	else if ((src[s] & 0xE0) == 0xC0)  //bytes: 2; 110x-xxxx 10xx-xxxx
     	{

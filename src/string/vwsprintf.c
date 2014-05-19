@@ -1,8 +1,8 @@
-#include "../../../system/varargsex.h"
+#include <xC/xvarargs.h>
 #include "../../string.h"
 #include "./printf_.h"
 
-int tr_vwsprintf(wchar *dest,const wchar *format, va_list arg_ptr)
+int string_vwsprintf(xwchar_t *dest,const xwchar_t *format, xva_list_t arg_ptr)
 {
-  return vwsnprintf(dest,(size_t)-1,format,arg_ptr);
+  return vwsnprintf(dest,(xsize_t)-1,format,arg_ptr);
 }

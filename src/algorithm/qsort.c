@@ -5,7 +5,7 @@
 static void shortsort(char *lo, char *hi, unsigned width, int (*comp)(const void *, const void *));
 static void swap(char *p, char *q, unsigned int width);
 
-void tr_qsort(void *base, unsigned num, unsigned width, int (*comp)(const void *, const void *))
+void algorithm_qsort(void *base, unsigned num, unsigned width, int (*comp)(const void *, const void *))
 {
   char *lo, *hi;
   char *mid;

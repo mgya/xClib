@@ -35,9 +35,9 @@ QUICKREF
 
 #include "../../string.h"
 
-const char * tr_strrchr(const char * s, char c)
+char * string_strrchr(const char * s, char c)
 {
-    const char * last = NULL;
+    const char * last = XNULL;
 
     if (c)
     {
@@ -52,5 +52,5 @@ const char * tr_strrchr(const char * s, char c)
         last = strchr(s, c);
     }
 
-    return last;
+    return (char *)last;
 }

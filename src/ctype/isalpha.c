@@ -29,7 +29,7 @@ undefining the macro using `<<#undef isalpha>>'.
 
 RETURNS
 <<isalpha>> returns non-zero if <[c]> is a letter (<<A>>--<<Z>> or
-<<a>>--<<z>>). 
+<<a>>--<<z>>).
 
 PORTABILITY
 <<isalpha>> is ANSI C.
@@ -40,7 +40,7 @@ No supporting OS subroutines are required.
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_isalpha(char c)
+xbool_t ctype_isalpha(char c)
 {
-    return ((_ctype_ + 1)[c] & (_U | _L)) != 0 ? true : false;
+    return ((_ctype_ + 1)[(xint8_t)c] & (_U | _L)) != 0 ? XTRUE : XFALSE;
 }

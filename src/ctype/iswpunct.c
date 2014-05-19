@@ -63,7 +63,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswpunct(wchar c)
+xbool_t ctype_iswpunct(xwchar_t c)
 {
-    return c < 0x100 ? ispunct((char)c) : false;
+    return c < 0x100 ? ispunct((char)c) : XFALSE;
 }

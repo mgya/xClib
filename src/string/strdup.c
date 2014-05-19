@@ -1,11 +1,11 @@
 #include "../../string.h"
-#include "../../../system/memory.h"
+#include <xC/xmemory.h>
 
-char * tr_strdup(const char * str)
+char * string_strdup(const char * str)
 {
-  char * puf = (char *)malloc(strlen(str));
+  char * puf = (char *)xmemory_alloc(strlen(str));
 
-  if (NULL == puf)
+  if (XNULL == puf)
   {
       return puf;
   }

@@ -34,7 +34,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswalnum(wchar c)
+xbool_t ctype_iswalnum(xwchar_t c)
 {
     return iswalpha(c) || iswdigit(c);
 }

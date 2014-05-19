@@ -9,11 +9,11 @@ log10_2lo  =  3.69423907715893078616e-13; /* 0x3D59FEF3, 0x11F12B36 */
 
 static const double zero   =  0.0;
 
-double tr_log10(double x)
+double math_log10(double x)
 {
     double y,z;
-    int32_t i,k,hx;
-    uint32_t lx;
+    xint32_t i,k,hx;
+    xuint32_t lx;
 
     EXTRACT_WORDS(hx,lx,x);
 
@@ -27,7 +27,7 @@ double tr_log10(double x)
     }
     if (hx >= 0x7ff00000) return x+x;
     k += (hx>>20)-1023;
-    i  = ((uint32_t)k&0x80000000)>>31;
+    i  = ((xuint32_t)k&0x80000000)>>31;
     hx = (hx&0x000fffff)|((0x3ff-i)<<20);
     y  = (double)(k+i);
     SET_HIGH_WORD(x,hx);

@@ -20,9 +20,9 @@ one    = 1.0,
 two24   =  1.67772160000000000000e+07, /* 0x41700000, 0x00000000 */
 twon24  =  5.96046447753906250000e-08; /* 0x3E700000, 0x00000000 */
 
-int kernel_rem_pio2(double *x, double *y, int e0, int nx, int prec, const int32_t *ipio2) 
+int kernel_rem_pio2(double *x, double *y, int e0, int nx, int prec, const xint32_t *ipio2) 
 {
-    int32_t jz,jx,jv,jp,jk,carry,n,iq[20],i,j,k,m,q0,ih;
+    xint32_t jz,jx,jv,jp,jk,carry,n,iq[20],i,j,k,m,q0,ih;
     double z,fw,f[20],fq[20],q[20];
 
     /* initialize jk*/
@@ -47,15 +47,15 @@ int kernel_rem_pio2(double *x, double *y, int e0, int nx, int prec, const int32_
 recompute:
     /* distill q[] into iq[] reversingly */
     for(i=0,j=jz,z=q[jz];j>0;i++,j--) {
-        fw    =  (double)((int32_t)(twon24* z));
-        iq[i] =  (int32_t)(z-two24*fw);
+        fw    =  (double)((xint32_t)(twon24* z));
+        iq[i] =  (xint32_t)(z-two24*fw);
         z     =  q[j-1]+fw;
     }
 
     /* compute n */
     z  = scalbn(z,(int)q0);    	/* actual value of z */
     z -= 8.0*floor(z*0.125);    	/* trim off integer >= 8 */
-    n  = (int32_t) z;
+    n  = (xint32_t) z;
     z -= (double)n;
     ih = 0;
     if(q0>0) {    /* need iq[jz-1] to determine n */
@@ -114,11 +114,11 @@ recompute:
     } else { /* break z into 24-bit if necessary */
         z = scalbn(z,-(int)q0);
         if(z>=two24) { 
-    	fw = (double)((int32_t)(twon24*z));
-    	iq[jz] = (int32_t)(z-two24*fw);
+    	fw = (double)((xint32_t)(twon24*z));
+    	iq[jz] = (xint32_t)(z-two24*fw);
     	jz += 1; q0 += 24;
-    	iq[jz] = (int32_t) fw;
-        } else iq[jz] = (int32_t) z ;
+    	iq[jz] = (xint32_t) fw;
+        } else iq[jz] = (xint32_t) z ;
     }
 
     /* convert integer "bit" chunk to floating-point value */

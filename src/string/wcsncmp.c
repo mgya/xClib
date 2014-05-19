@@ -3,14 +3,14 @@ FUNCTION
     <<wcsncmp>>---compare part of two wide-character strings 
 
 ANSI_SYNOPSIS
-    #include <wchar.h>
-    int wcsncmp(const wchar *<[s1]>, const wchar *<[s2]>, size_t <[n]>);
+    #include <xwchar_t.h>
+    int wcsncmp(const xwchar_t *<[s1]>, const xwchar_t *<[s2]>, xsize_t <[n]>);
 
 TRAD_SYNOPSIS
-    int tr_wcsncmp(<[s1]>, <[s2]>, <[n]>
-    const wchar *<[s1]>;
-    const wchar *<[s2]>;
-    size_t <[n]>;
+    int string_wcsncmp(<[s1]>, <[s2]>, <[n]>
+    const xwchar_t *<[s1]>;
+    const xwchar_t *<[s2]>;
+    xsize_t <[n]>;
 
 DESCRIPTION
     The <<wcsncmp>> function compares not more than <[n]> wide-character
@@ -67,7 +67,7 @@ No supporting OS subroutines are required.
 
 #include "../../string.h"
 
-int tr_wcsncmp(const wchar * s1, const wchar * s2, size_t n)
+int string_wcsncmp(const xwchar_t * s1, const xwchar_t * s2, xsize_t n)
 {
     if (n == 0)
     	return 0;
