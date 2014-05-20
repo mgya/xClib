@@ -54,12 +54,12 @@
 #define wcstod(pw,ppw)                string_wcstod((pw),(ppw))
 #define wcstold(pw,ppw)               string_wcstold((pw),(ppw))
 
-#define sprintf(pc1,pc2,...)          string_sprintf((pc1),(pc2),VA_ARGS)
-#define snprintf(pc1,s,pc2,...)       string_snprintf((pc1),(s),(pc2),VA_ARGS)
+#define sprintf(pc1,pc2,...)          string_sprintf((pc1),(pc2),__VA_ARGS__)
+#define snprintf(pc1,s,pc2,...)       string_snprintf((pc1),(s),(pc2),__VA_ARGS__)
 #define vsprintf(pc1,pc2,ls)          string_vsprintf((pc1),(pc2),(ls))
 #define vsnprintf(pc1,s,pc2,ls)       string_vsnprintf((pc1),(s),(pc2),(ls))
-#define wsprintf(pw1,pw2,...)         string_wsprintf((pw1),(pw2),VA_ARGS)
-#define wsnprintf(pw1,s,pw2,...)      string_wsnprintf((pw1),(s),(pw2),VA_ARGS)
+#define wsprintf(pw1,pw2,...)         string_wsprintf((pw1),(pw2),__VA_ARGS__)
+#define wsnprintf(pw1,s,pw2,...)      string_wsnprintf((pw1),(s),(pw2),__VA_ARGS__)
 #define vwsprintf(pw1,pw2,ls)         string_vwsprintf((pw1),(pw2),(ls))
 #define vwsnprintf(pw1,s,pw2,ls)      string_vwsnprintf((pw1),(s),(pw2),(ls))
 
