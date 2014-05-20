@@ -7,17 +7,17 @@ INDEX
 
 ANSI_SYNOPSIS
     #include <string.h>
-    size_t tr_strlen(const char *<[str]>);
+    xsize_t string_strlen(const char *<[str]>);
 
 TRAD_SYNOPSIS
     #include <string.h>
-    size_t tr_strlen(<[str]>)
+    xsize_t string_strlen(<[str]>)
     char *<[src]>;
 
 DESCRIPTION
     The <<strlen>> function works out the length of the string
     starting at <<*<[str]>>> by counting chararacters until it
-    reaches a <<NULL>> character.
+    reaches a <<XNULL>> character.
 
 RETURNS
     <<strlen>> returns the character count.
@@ -33,7 +33,7 @@ QUICKREF
 
 #include "../../string.h"
 
-size_t tr_strlen(const char * str)
+xsize_t string_strlen(const char * str)
 {
   const char * start = str;
 

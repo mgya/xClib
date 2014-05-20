@@ -28,7 +28,7 @@ You can use a compiled subroutine instead of the macro definition by
 undefining the macro using `<<#undef ispunct>>'.
 
 RETURNS
-<<ispunct>> returns non-zero if <[c]> is a printable punctuation character 
+<<ispunct>> returns non-zero if <[c]> is a printable punctuation character
 (<<isgraph(<[c]>) && !isalnum(<[c]>)>>).
 
 PORTABILITY
@@ -40,7 +40,7 @@ No supporting OS subroutines are required.
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_ispunct(char c)
+xbool_t ctype_ispunct(char c)
 {
-    return ((_ctype_ + 1)[c] & _P) != 0 ? true : false;
+    return ((_ctype_ + 1)[(xint8_t)c] & _P) != 0 ? XTRUE : XFALSE;
 }

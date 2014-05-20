@@ -1,7 +1,7 @@
 #include "./fdlibm.h"
 #include "../../math.h"
 
-int64_t tr_labs(int64_t i)
+xint64_t math_labs(xint64_t i)
 {
     return (i < 0) ? -i : i;
 }

@@ -1,6 +1,6 @@
 #include "../../math.h"
 
-int tr_ffs(int x)
+int string_ffs(int x)
 {
     int r = 1;
 

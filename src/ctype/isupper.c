@@ -39,7 +39,7 @@ No supporting OS subroutines are required.
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_isupper(char c)
+xbool_t ctype_isupper(char c)
 {
-    return ((_ctype_ + 1)[c] & _U) != 0 ? true : false;
+    return ((_ctype_ + 1)[(xint8_t)c] & _U) != 0 ? XTRUE : XFALSE;
 }

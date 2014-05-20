@@ -9,18 +9,18 @@ pi_o_2  = 1.5707963267948965580E+00, /* 0x3FF921FB, 0x54442D18 */
 pi      = 3.1415926535897931160E+00, /* 0x400921FB, 0x54442D18 */
 pi_lo   = 1.2246467991473531772E-16; /* 0x3CA1A626, 0x33145C07 */
 
-double tr_atan2(double y, double x)
+double math_atan2(double y, double x)
 {  
     double z;
-    int32_t k,m,hx,hy,ix,iy;
-    uint32_t lx,ly;
+    xint32_t k,m,hx,hy,ix,iy;
+    xuint32_t lx,ly;
 
     EXTRACT_WORDS(hx,lx,x);
     ix = hx&0x7fffffff;
     EXTRACT_WORDS(hy,ly,y);
     iy = hy&0x7fffffff;
-    if(((ix|((lx|-(int32_t)lx)>>31))>0x7ff00000)||
-        ((iy|((ly|-(int32_t)ly)>>31))>0x7ff00000))    /* x or y is NaN */
+    if(((ix|((lx|-(xint32_t)lx)>>31))>0x7ff00000)||
+        ((iy|((ly|-(xint32_t)ly)>>31))>0x7ff00000))    /* x or y is NaN */
         return x+y;
     if((hx-0x3ff00000|lx)==0) return atan(y);   /* x=1.0 */
     m = ((hy>>31)&1)|((hx>>30)&2);    /* 2*sign(x)+sign(y) */
@@ -66,7 +66,7 @@ double tr_atan2(double y, double x)
     switch (m) {
         case 0: return       z  ;    /* atan(+,+) */
         case 1: {
-            uint32_t zh;
+            xuint32_t zh;
             GET_HIGH_WORD(zh,z);
             SET_HIGH_WORD(z,zh ^ 0x80000000);
                 }

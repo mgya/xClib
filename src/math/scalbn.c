@@ -9,7 +9,7 @@ tiny   = 1.0e-300;
 
 double scalbn(double x, int n)
 {
-    int32_t  k,hx,lx;
+    xint32_t  k,hx,lx;
     EXTRACT_WORDS(hx,lx,x);
         k = (hx&0x7ff00000)>>20;    	/* extract exponent */
         if (k==0) {    	    	/* 0 or subnormal x */

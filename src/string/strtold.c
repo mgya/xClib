@@ -1,7 +1,7 @@
 #include "../../string.h"
 #include "../../ctype.h"
 
-long double tr_strtold(const char* s, char** endptr) {
+long double string_strtold(const char* s, char** endptr) {
     register const char*  p     = s;
     register long double  value = 0.L;
     int                   sign  = +1;
@@ -58,7 +58,7 @@ long double tr_strtold(const char* s, char** endptr) {
     }
 
 done:
-    if ( endptr != NULL )
+    if ( endptr != XNULL )
         *endptr = (char*)p;
 
     return value * sign;

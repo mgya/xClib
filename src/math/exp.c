@@ -20,16 +20,16 @@ P4   = -1.65339022054652515390e-06, /* 0xBEBBBD41, 0xC5D26BF1 */
 P5   =  4.13813679705723846039e-08; /* 0x3E663769, 0x72BEA4D0 */
 
 
-double tr_exp(double x)    /* default IEEE double exp */
+double math_exp(double x)    /* default IEEE double exp */
 {
     double y = 0;
     double hi = 0;
     double lo =0;
     double c =0;
     double t = 0;
-    int32_t k =0;
-    int32_t xsb =0;
-    uint32_t hx =0;
+    xint32_t k =0;
+    xint32_t xsb =0;
+    xuint32_t hx =0;
 
     GET_HIGH_WORD(hx,x);
     xsb = (hx>>31)&1;    	/* sign bit of x */
@@ -38,7 +38,7 @@ double tr_exp(double x)    /* default IEEE double exp */
     /* filter out non-finite argument */
     if(hx >= 0x40862E42) {    	    /* if |x|>=709.78... */
             if(hx>=0x7ff00000) {
-            uint32_t lx;
+            xuint32_t lx;
     	GET_LOW_WORD(lx,x);
     	if(((hx&0xfffff)|lx)!=0) 
     	     return x+x;     	/* NaN */
@@ -54,7 +54,7 @@ double tr_exp(double x)    /* default IEEE double exp */
         if(hx < 0x3FF0A2B2) {    /* and |x| < 1.5 ln2 */
     	hi = x-ln2HI[xsb]; lo=ln2LO[xsb]; k = 1-xsb-xsb;
         } else {
-    	k  = (int32_t)(invln2*x+halF[xsb]);
+    	k  = (xint32_t)(invln2*x+halF[xsb]);
     	t  = k;
     	hi = x - t*ln2HI[0];    /* t*ln2HI is exact here */
     	lo = t*ln2LO[0];
@@ -73,12 +73,12 @@ double tr_exp(double x)    /* default IEEE double exp */
     if(k==0)     return one-((x*c)/(c-2.0)-x); 
     else     	y = one-((lo-(x*c)/(2.0-c))-hi);
     if(k >= -1021) {
-        uint32_t hy;
+        xuint32_t hy;
         GET_HIGH_WORD(hy,y);
         SET_HIGH_WORD(y,hy+(k<<20));    /* add k to y's exponent */
         return y;
     } else {
-        uint32_t hy;
+        xuint32_t hy;
         GET_HIGH_WORD(hy,y);
         SET_HIGH_WORD(y,hy+((k+1000)<<20));    /* add k to y's exponent */
         return y*twom1000;

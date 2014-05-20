@@ -9,7 +9,10 @@ QT       -= core gui
 TARGET = xClib
 TEMPLATE = lib
 CONFIG += staticlib
+
 INCLUDEPATH = ../../../
+DEFINES += __LITTLE_ENDIAN
+QMAKE_CFLAGS_WARN_ON += -Wno-unused-parameter
 
 SOURCES += \
     ../algorithm/bsearch.c \
@@ -79,8 +82,8 @@ SOURCES += \
     ../string/strtoul.c \
     ../string/unitoutf.c \
     ../string/utftouni.c \
-    ../string/vsnprintf.c \
     ../string/vsprintf.c \
+    ../string/vsnprintf.c \
     ../string/vwsnprintf.c \
     ../string/vwsprintf.c \
     ../string/wcscat.c \

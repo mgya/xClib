@@ -7,11 +7,11 @@ INDEX
 
 ANSI_SYNOPSIS
     #include <string.h>
-    char *tr_strcpy(char *<[dst]>, const char *<[src]>);
+    char *string_strcpy(char *<[dst]>, const char *<[src]>);
 
 TRAD_SYNOPSIS
     #include <string.h>
-    char *tr_strcpy(<[dst]>, <[src]>)
+    char *string_strcpy(<[dst]>, <[src]>)
     char *<[dst]>;
     char *<[src]>;
 
@@ -34,12 +34,12 @@ QUICKREF
 
 #include "../../string.h"
 
-char * tr_strcpy(char * dst0, const char * src0)
+char * string_strcpy(char * dst0, const char * src0)
 {
     char * s = dst0;
 
-    while (*dst0++ = *src0++)
-    	;
+    while ((*dst0++ = *src0++) != 0)
+        ;
 
     return s;
 }

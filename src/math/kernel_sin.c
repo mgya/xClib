@@ -13,7 +13,7 @@ S6  =  1.58969099521155010221e-10; /* 0x3DE5D93A, 0x5ACFD57C */
 double kernel_sin(double x, double y, int iy)
 {
     double z,r,v;
-    int32_t ix;
+    xint32_t ix;
     GET_HIGH_WORD(ix,x);
     ix &= 0x7fffffff;    	    /* high word of x */
     if(ix<0x3e400000)    	    /* |x| < 2**-27 */

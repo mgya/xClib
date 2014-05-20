@@ -34,7 +34,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswlower(wchar c)
+xbool_t ctype_iswlower(xwchar_t c)
 {
     return towupper(c) != c;
 }

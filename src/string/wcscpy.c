@@ -1,25 +1,25 @@
 /*
 FUNCTION
-    <<wcscpy>>---copy a wide-character string 
+    <<wcscpy>>---copy a wide-character string
 
 ANSI_SYNOPSIS
-    #include <wchar.h>
-    wchar *tr_wcscpy(wchar *<[s1]>, const wchar *,<[s2]>);
+    #include <xwchar_t.h>
+    xwchar_t *string_wcscpy(xwchar_t *<[s1]>, const xwchar_t *,<[s2]>);
 
 TRAD_SYNOPSIS
-    wchar *tr_wcscpy(<[s1]>, <[s2]>
-    wchar *<[s1]>;
-    const wchar *<[s2]>;
+    xwchar_t *string_wcscpy(<[s1]>, <[s2]>
+    xwchar_t *<[s1]>;
+    const xwchar_t *<[s2]>;
 
 DESCRIPTION
     The <<wcscpy>> function copies the wide-character string pointed to by
     <[s2]> (including the terminating null wide-character code) into the
     array pointed to by <[s1]>. If copying takes place between objects that
-    overlap, the behaviour is undefined. 
+    overlap, the behaviour is undefined.
 
 RETURNS
     The <<wcscpy>> function returns <[s1]>; no return value is reserved to
-    indicate an error. 
+    indicate an error.
 
 PORTABILITY
 <<wcscpy>> is ISO/IEC 9899/AMD1:1995 (ISO C).
@@ -59,12 +59,12 @@ No supporting OS subroutines are required.
 
 #include "../../string.h"
 
-wchar * tr_wcscpy(wchar * dst0, const wchar * src0)
+xwchar_t * string_wcscpy(xwchar_t * dst0, const xwchar_t * src0)
 {
-    wchar * s = dst0;
+    xwchar_t * s = dst0;
 
-    while (*dst0++ = *src0++)
-    	;
+    while ((*dst0++ = *src0++) != 0)
+        ;
 
     return s;
 }

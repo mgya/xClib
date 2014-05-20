@@ -1,13 +1,13 @@
-#include "../../../system/varargsex.h"
+#include <xC/xvarargs.h>
 #include "../../string.h"
 #include "./printf_.h"
 
-int tr_wsprintf(wchar *dest,const wchar *format,...)
+int string_wsprintf(xwchar_t *dest,const xwchar_t *format,...)
 {
   int n;
-  va_list arg_ptr;
-  va_start(arg_ptr, format);
+  xva_list_t arg_ptr;
+  XVA_START(arg_ptr, format);
   n=vwsprintf(dest,format,arg_ptr);
-  va_end (arg_ptr);
+  XVA_END (arg_ptr);
   return n;
 }

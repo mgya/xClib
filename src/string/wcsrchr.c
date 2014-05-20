@@ -1,24 +1,24 @@
 /*
 FUNCTION
-    <<wcsrchr>>---wide-character string scanning operation 
+    <<wcsrchr>>---wide-character string scanning operation
 
 ANSI_SYNOPSIS
-    #include <wchar.h>
-    wchar *wcsrchr(const wchar *<[s]>, wchar <[c]>);
+    #include <xwchar_t.h>
+    xwchar_t *wcsrchr(const xwchar_t *<[s]>, xwchar_t <[c]>);
 
 TRAD_SYNOPSIS
-    #include <wchar.h>
-    wchar *tr_wcsrchr(<[s]>, <[c]>
-    const wchar *<[s]>;
-    wchar <[c]>;
+    #include <xwchar_t.h>
+    xwchar_t *string_wcsrchr(<[s]>, <[c]>
+    const xwchar_t *<[s]>;
+    xwchar_t <[c]>;
 
 DESCRIPTION
     The <<wcsrchr>> function locates the last occurrence of <[c]> in the
     wide-character string pointed to by <[s]>. The value of <[c]> must be a
-    character representable as a type wchar and must be a wide-character
+    character representable as a type xwchar_t and must be a wide-character
     code corresponding to a valid character in the current locale.
     The terminating null wide-character code is considered to be part of
-    the wide-character string. 
+    the wide-character string.
 
 RETURNS
     Upon successful completion, <<wcsrchr>> returns a pointer to the
@@ -63,22 +63,22 @@ No supporting OS subroutines are required.
 
 #include "../../string.h"
 
-const wchar * tr_wcsrchr(const wchar * s, wchar c)
+xwchar_t * string_wcsrchr(const xwchar_t * s, xwchar_t c)
 {
-    const wchar * last = NULL;
+    const xwchar_t * last = XNULL;
 
     if (c)
     {
-    	while ((s = wcschr(s, c)))
-    	{
-    	    last = s;
-    	    ++s;
-    	}
+        while ((s = wcschr(s, c)))
+        {
+            last = s;
+            ++s;
+        }
     }
     else
     {
-    	last = wcschr(s, c);
+        last = wcschr(s, c);
     }
 
-    return last;
+    return (xwchar_t *)last;
 }

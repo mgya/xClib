@@ -26,7 +26,7 @@ TRAD_SYNOPSIS
 DESCRIPTION
 <<isprint>> is a macro which classifies ASCII integer values by table
 lookup.  It is a predicate returning non-zero for printable
-characters, and 0 for other character arguments. 
+characters, and 0 for other character arguments.
 It is defined only when <<isascii>>(<[c]>) is true or <[c]> is EOF.
 
 You can use a compiled subroutine instead of the macro definition by
@@ -47,7 +47,7 @@ No supporting OS subroutines are required.
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_isgraph(char c)
+xbool_t ctype_isgraph(char c)
 {
-    return ((_ctype_ + 1)[c] & (_P | _U | _L | _N)) != 0 ? true : false;
+    return ((_ctype_ + 1)[(xint8_t)c] & (_P | _U | _L | _N)) != 0 ? XTRUE : XFALSE;
 }

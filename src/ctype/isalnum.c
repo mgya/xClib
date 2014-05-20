@@ -4,7 +4,7 @@
 */
 
 /*
-FUNCTION 
+FUNCTION
     <<isalnum>>---alphanumeric character predicate
 
 INDEX
@@ -41,7 +41,7 @@ No OS subroutines are required.
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_isalnum(char c)
+xbool_t ctype_isalnum(char c)
 {
-    return ((_ctype_ + 1)[c] & (_U | _L | _N)) != 0 ? true : false;
+    return ((_ctype_ + 1)[(xint8_t)c] & (_U | _L | _N)) != 0 ? XTRUE : XFALSE;
 }

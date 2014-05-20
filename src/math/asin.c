@@ -19,14 +19,14 @@ qS2 =  2.02094576023350569471e+00, /* 0x40002AE5, 0x9C598AC8 */
 qS3 = -6.88283971605453293030e-01, /* 0xBFE6066C, 0x1B8D0159 */
 qS4 =  7.70381505559019352791e-02; /* 0x3FB3B8C5, 0xB12E9282 */
 
-double tr_asin(double x)
+double math_asin(double x)
 {
     double t,w,p,q,c,r,s;
-    int32_t hx,ix;
+    xint32_t hx,ix;
     GET_HIGH_WORD(hx,x);
     ix = hx&0x7fffffff;
     if(ix>= 0x3ff00000) {    	/* |x|>= 1 */
-        uint32_t lx;
+        xuint32_t lx;
         GET_LOW_WORD(lx,x);
         if(((ix-0x3ff00000)|lx)==0)
     	    /* asin(1)=+-pi/2 with inexact */

@@ -33,15 +33,15 @@ static const double
 one   = 1.0,
 vchuge   = 1.0e300;//qubing fix for error:'huge' is an obsolete keyword
 
-double tr_atan(double x)
+double math_atan(double x)
 {
     double w,s1,s2,z;
-    int32_t ix,hx,id;
+    xint32_t ix,hx,id;
 
     GET_HIGH_WORD(hx,x);
     ix = hx&0x7fffffff;
     if(ix>=0x44100000) {    /* if |x| >= 2^66 */
-        uint32_t low;
+        xuint32_t low;
         GET_LOW_WORD(low,x);
         if(ix>0x7ff00000||
     	(ix==0x7ff00000&&(low!=0)))

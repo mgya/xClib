@@ -63,7 +63,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-bool tr_iswspace(wchar c)
+xbool_t ctype_iswspace(xwchar_t c)
 {
-    return c < 0x100 ? isspace((char)c) : false;
+    return c < 0x100 ? isspace((char)c) : XFALSE;
 }

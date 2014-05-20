@@ -1,10 +1,10 @@
 #include "./fdlibm.h"
 #include "../../math.h"
 
-double tr_sin(double x)
+double math_sin(double x)
 {
     double y[2],z=0.0;
-    int32_t n,ix;
+    xint32_t n,ix;
 
     /* High word of x. */
     GET_HIGH_WORD(ix,x);

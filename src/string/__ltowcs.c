@@ -1,10 +1,10 @@
 #include "../../string.h"
-#include "../../../system/memory.h"
+#include <xC/xmemory.h>
 #include "./printf_.h"
 
-int __ltowcs(wchar *s, unsigned int size, unsigned long i, unsigned int base, int UpCase)
+int __ltowcs(xwchar_t *s, unsigned int size, unsigned long i, unsigned int base, int UpCase)
 {
-  wchar *tmp;
+  xwchar_t *tmp;
   unsigned int j=0;
 
   s[--size]=0;
@@ -23,12 +23,12 @@ int __ltowcs(wchar *s, unsigned int size, unsigned long i, unsigned int base, in
   while((tmp>s)&&(i))
   {
     tmp--;
-    if ((*tmp=(wchar)(i%base+'0'))>'9') *tmp+=(UpCase?'A':'a')-'9'-1;
+    if ((*tmp=(xwchar_t)(i%base+'0'))>'9') *tmp+=(UpCase?'A':'a')-'9'-1;
     i=i/base;
     j++;
   }
  // wcsncpy(s,tmp,j+1);
-  memmove(s,tmp,(j+1)*sizeof(wchar));
+  xmemory_move(s,tmp,(j+1)*sizeof(xwchar_t));
 
   return j;
 }

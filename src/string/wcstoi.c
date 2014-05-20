@@ -1,11 +1,11 @@
 #include "../../string.h"
 #include "../../ctype.h"
 
-int tr_wcstoi(const wchar * nptr, wchar ** endptr, int base)
+int string_wcstoi(const xwchar_t * nptr, xwchar_t ** endptr, int base)
 {
-    register const wchar * s = nptr;
+    register const xwchar_t * s = nptr;
     register unsigned int acc;
-    register wchar c;
+    register xwchar_t c;
     register unsigned int cutoff;
     register int neg = 0, any, cutlim;
 
@@ -26,7 +26,7 @@ int tr_wcstoi(const wchar * nptr, wchar ** endptr, int base)
     if (base == 0)
     	base = c == L'0' ? 8 : 10;
 
-    cutoff = neg ? -(int)INT32_MIN : INT32_MAX;
+    cutoff = neg ? -(int)XINT32_MIN : XINT32_MAX;
     cutlim = (int)(cutoff % (unsigned int)base);
     cutoff /= (unsigned long)base;
     for (acc = 0, any = 0;; c = *s++) {
@@ -47,10 +47,10 @@ int tr_wcstoi(const wchar * nptr, wchar ** endptr, int base)
     	}
     }
     if (any < 0) {
-    	acc = neg ? INT32_MIN : INT32_MAX;
+    	acc = neg ? XINT32_MIN : XINT32_MAX;
     } else if (neg)
     	acc = (unsigned int)(-(int)acc);
     if (endptr != 0)
-    	*endptr = (wchar *) (any ? s - 1 : nptr);
+    	*endptr = (xwchar_t *) (any ? s - 1 : nptr);
     return (acc);
 }

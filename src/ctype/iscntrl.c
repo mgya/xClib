@@ -20,9 +20,9 @@ TRAD_SYNOPSIS
 
 DESCRIPTION
 <<iscntrl>> is a macro which classifies ASCII integer values by table
-lookup.  It is a predicate returning non-zero for control characters, and 0 
+lookup.  It is a predicate returning non-zero for control characters, and 0
 for other characters.  It is defined only when <<isascii>>(<[c]>) is
-true or <[c]> is EOF. 
+true or <[c]> is EOF.
 
 You can use a compiled subroutine instead of the macro definition by
 undefining the macro using `<<#undef iscntrl>>'.
@@ -40,7 +40,7 @@ No supporting OS subroutines are required.
 #include "../../ctype.h"
 #include "./ctype_.h"
 
-bool tr_iscntrl(char c)
+xbool_t ctype_iscntrl(char c)
 {
-    return ((_ctype_ + 1)[c] & _C) != 0 ? true : false;
+    return ((_ctype_ + 1)[(xint8_t)c] & _C) != 0 ? XTRUE : XFALSE;
 }

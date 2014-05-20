@@ -64,7 +64,7 @@ No supporting OS subroutines are required.
 
 #include "../../ctype.h"
 
-wchar tr_towlower(wchar c)
+xwchar_t ctype_towlower(xwchar_t c)
 {
-    return c < 0x00ff ? (wchar)tolower((char)c) : c;
+    return c < 0x00ff ? (xwchar_t)tolower((char)c) : c;
 }

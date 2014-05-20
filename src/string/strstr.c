@@ -7,7 +7,7 @@ INDEX
 
 ANSI_SYNOPSIS
     #include <string.h>
-    char *tr_strstr(const char *<[s1]>, const char *<[s2]>);
+    char *string_strstr(const char *<[s1]>, const char *<[s2]>);
 
 TRAD_SYNOPSIS
     #include <string.h>
@@ -36,37 +36,37 @@ QUICKREF
 
 #include "../../string.h"
 
-const char * tr_strstr(const char * searchee, const char * lookfor)
+char * string_strstr(const char * searchee, const char * lookfor)
 {
     if (*searchee == '\0')
     {
-    	if (*lookfor)
-    	    return NULL;
+        if (*lookfor)
+            return XNULL;
 
-    	return searchee;
+        return (char *)searchee;
     }
 
     while (*searchee)
     {
-    	size_t i = 0;
+        xsize_t i = 0;
 
-    	while (1)
-    	{
-    	    if (lookfor[i] == '\0')
-    	    {
-    	    	return searchee;
-    	    }
+        while (1)
+        {
+            if (lookfor[i] == '\0')
+            {
+                return (char *)searchee;
+            }
 
-    	    if (lookfor[i] != searchee[i])
-    	    {
-    	    	break;
-    	    }
+            if (lookfor[i] != searchee[i])
+            {
+                break;
+            }
 
-    	    ++i;
-    	}
+            ++i;
+        }
 
-    	++searchee;
+        ++searchee;
     }
 
-    return NULL;
+    return XNULL;
 }

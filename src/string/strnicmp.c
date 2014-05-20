@@ -1,7 +1,7 @@
 #include "../../string.h"
 #include "../../ctype.h"
 
-int tr_strnicmp(const char * s1, const char * s2, size_t n)
+int string_strnicmp(const char * s1, const char * s2, xsize_t n)
 {
     if (n == 0)
     	return 0;

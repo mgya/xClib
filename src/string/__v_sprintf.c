@@ -1,4 +1,4 @@
-#include "../../../system/varargsex.h"
+#include <xC/xvarargs.h>
 #include "../../string.h"
 #include "./printf_.h"
 
@@ -27,7 +27,7 @@ static int write_pad(unsigned int* dlen,struct arg_printf* fn, unsigned int len,
   return 0;
 }
 
-int __v_sprintf(struct arg_printf* fn, const char *format, va_list arg_ptr)
+int __v_sprintf(struct arg_printf* fn, const char *format, xva_list_t arg_ptr)
 {
   unsigned int len=0;
 
@@ -58,7 +58,7 @@ int __v_sprintf(struct arg_printf* fn, const char *format, va_list arg_ptr)
       unsigned int width=0, preci=0;
 
       long number=0;
-      int64_t llnumber=0;
+      xint64_t llnumber=0;
 
       ++format;
 inn_printf:
@@ -114,14 +114,14 @@ inn_printf:
     goto inn_printf;
 
       case '*':
-    width=va_arg(arg_ptr,int);
+    width=XVA_ARG(arg_ptr,int);
     if (width>MAX_WIDTH) return -1; /* width is unsiged, so this catches <0, too */
     goto inn_printf;
 
       case '.':
     flag_dot=1;
     if (*format=='*') {
-      int tmp=va_arg(arg_ptr,int);
+      int tmp=XVA_ARG(arg_ptr,int);
       preci=tmp<0?0:tmp;
       ++format;
     } else {
@@ -134,13 +134,13 @@ inn_printf:
 
       /* print a char or % */
       case 'c':
-    ch=(char)va_arg(arg_ptr,int);
+    ch=(char)XVA_ARG(arg_ptr,int);
       case '%':
     B_WRITE(fn,&ch,1); ++len;
     break;
       /* print a string */
       case 's':
-    s=va_arg(arg_ptr,char *);
+    s=XVA_ARG(arg_ptr,char *);
     sz = (unsigned long)strlen(s);
     if (flag_dot && sz>preci) sz=preci;
     preci=0;
@@ -151,12 +151,12 @@ print_out:
       {
     char *sign=s;
     int todo=0;
-    
+
     if (! (width||preci) ) {
       B_WRITE(fn,s,sz); len+=sz;
       break;
     }
-    
+
     if (flag_in_sign) todo=1;
     if (flag_hash>0)  todo=flag_hash;
     if (todo) {
@@ -203,7 +203,7 @@ print_out:
       if (write_pad(&len,fn,width-preci,padwith))
         return -1;
     }
-    
+
     break;
       }
 
@@ -250,12 +250,12 @@ num_printf:
 
     if (flag_long>0) {
       if (flag_long>1)
-        llnumber=va_arg(arg_ptr,int64_t);
+        llnumber=XVA_ARG(arg_ptr,xint64_t);
       else
-        number=va_arg(arg_ptr,long);
+        number=XVA_ARG(arg_ptr,long);
     }
     else {
-      number=va_arg(arg_ptr,int);
+      number=XVA_ARG(arg_ptr,int);
       if (sizeof(int) != sizeof(long) && !flag_in_sign)
         number&=((unsigned int)-1);
     }
@@ -264,7 +264,7 @@ num_printf:
       if ((flag_long>1)&&(llnumber<0)) {
         llnumber=-llnumber;
         flag_in_sign=2;
-      } 
+      }
       else if (number<0) {
           number=-number;
           flag_in_sign=2;
@@ -273,7 +273,7 @@ num_printf:
     if (flag_long<0) number&=0xffff;
     if (flag_long<-1) number&=0xff;
     if (flag_long>1)
-      retval = __lltostr(s+sz,sizeof(buf)-5,(uint64_t) llnumber,base,flag_upcase);
+      retval = __lltostr(s+sz,sizeof(buf)-5,(xuint64_t) llnumber,base,flag_upcase);
     else
       retval = __ltostr(s+sz,sizeof(buf)-5,(unsigned long) number,base,flag_upcase);
 
@@ -300,53 +300,53 @@ num_printf:
       /* print a floating point value */
       case 'f':
       case 'g':
-	{
-	  int g=(ch=='g');
-	  double d=va_arg(arg_ptr,double);
-	  s=buf+1;
-	  if (width==0) width=1;
-	  if (!flag_dot) preci=6;
-	  if (flag_sign || d < +0.0) flag_in_sign=1;
+    {
+      int g=(ch=='g');
+      double d=XVA_ARG(arg_ptr,double);
+      s=buf+1;
+      if (width==0) width=1;
+      if (!flag_dot) preci=6;
+      if (flag_sign || d < +0.0) flag_in_sign=1;
 
-	  sz=__dtostr(d,s,sizeof(buf)-1,width,preci,g);
+      sz=__dtostr(d,s,sizeof(buf)-1,width,preci,g);
 
-	  if (flag_dot) {
-	    char *tmp;
-	    if ((tmp=strchr(s,'.'))) {
-	      if (preci || flag_hash) ++tmp;
-	      while (preci>0 && *++tmp) --preci;
-	      *tmp=0;
-	    } else if (flag_hash) {
-	      s[sz]='.';
-	      s[++sz]='\0';
-	    }
-	  }
+      if (flag_dot) {
+        char *tmp;
+        if ((tmp=strchr(s,'.'))) {
+          if (preci || flag_hash) ++tmp;
+          while (preci>0 && *++tmp) --preci;
+          *tmp=0;
+        } else if (flag_hash) {
+          s[sz]='.';
+          s[++sz]='\0';
+        }
+      }
 
-	  if (g) {
-	    char *tmp,*tmp1;	/* boy, is _this_ ugly! */
-	    if ((tmp=strchr(s,'.'))) {
-	      tmp1=strchr(tmp,'e');
-	      while (*tmp) ++tmp;
-	      if (tmp1) tmp=tmp1;
-	      while (*--tmp=='0') ;
-	      if (*tmp!='.') ++tmp;
-	      *tmp=0;
-	      if (tmp1) strcpy(tmp,tmp1);
-	    }
-	  }
-	  
-	  if ((flag_sign || flag_space) && d>=0) {
-	    *(--s)=(flag_sign)?'+':' ';
-	    ++sz;
-	  }
-	  
-	  sz=strlen(s);
-	  if (width<sz) width=sz;
-	  padwith='0';
-	  flag_dot=0;
-	  flag_hash=0;
-	  goto print_out;
-	}
+      if (g) {
+        char *tmp,*tmp1;	/* boy, is _this_ ugly! */
+        if ((tmp=strchr(s,'.'))) {
+          tmp1=strchr(tmp,'e');
+          while (*tmp) ++tmp;
+          if (tmp1) tmp=tmp1;
+          while (*--tmp=='0') ;
+          if (*tmp!='.') ++tmp;
+          *tmp=0;
+          if (tmp1) strcpy(tmp,tmp1);
+        }
+      }
+
+      if ((flag_sign || flag_space) && d>=0) {
+        *(--s)=(flag_sign)?'+':' ';
+        ++sz;
+      }
+
+      sz=strlen(s);
+      if (width<sz) width=sz;
+      padwith='0';
+      flag_dot=0;
+      flag_hash=0;
+      goto print_out;
+    }
 
       default:
     break;

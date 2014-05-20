@@ -3,18 +3,18 @@ FUNCTION
     <<strncat>>---concatenate strings
 
 INDEX
-    tr_strncat
+    string_strncat
 
 ANSI_SYNOPSIS
     #include <string.h>
-    char *strncat(char *<[dst]>, const char *<[src]>, size_t <[length]>);
+    char *strncat(char *<[dst]>, const char *<[src]>, xsize_t <[length]>);
 
 TRAD_SYNOPSIS
     #include <string.h>
-    char *tr_strncat(<[dst]>, <[src]>, <[length]>)
+    char *string_strncat(<[dst]>, <[src]>, <[length]>)
     char *<[dst]>;
     char *<[src]>;
-    size_t <[length]>;
+    xsize_t <[length]>;
 
 DESCRIPTION
     <<strncat>> appends not more than <[length]> characters from
@@ -43,7 +43,7 @@ QUICKREF
 
 #include "../../string.h"
 
-char * tr_strncat(char * s1, const char * s2, size_t n)
+char * string_strncat(char * s1, const char * s2, xsize_t n)
 {
     char * s = s1;
 

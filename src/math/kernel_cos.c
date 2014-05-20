@@ -13,7 +13,7 @@ C6  = -1.13596475577881948265e-11; /* 0xBDA8FAE9, 0xBE8838D4 */
 double kernel_cos(double x, double y)
 {
     double a,hz,z,r,qx;
-    int32_t ix;
+    xint32_t ix;
     GET_HIGH_WORD(ix,x);
     ix &= 0x7fffffff;    	    /* ix = |x|'s high word*/
     if(ix<0x3e400000) {    	    /* if x < 2**27 */

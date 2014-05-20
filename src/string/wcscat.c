@@ -5,13 +5,13 @@ INDEX
     wcscat
 
 ANSI_SYNOPSIS
-    #include <wchar.h>
-    wchar *tr_wcscat(wchar *<[s1]>, const wchar *<[s2]>);
+    #include <xwchar_t.h>
+    xwchar_t *string_wcscat(xwchar_t *<[s1]>, const xwchar_t *<[s2]>);
 
 TRAD_SYNOPSIS
-    wchar *wcscat(<[s1]>, <[s2]>
-    wchar *<[s1]>;
-    const wchar *<[s2]>;
+    xwchar_t *wcscat(<[s1]>, <[s2]>
+    xwchar_t *<[s1]>;
+    const xwchar_t *<[s2]>;
 
 DESCRIPTION
     The <<wcscat>> function appends a copy of the wide-character string
@@ -19,11 +19,11 @@ DESCRIPTION
     code) to the end of the wide-character string pointed to by <[s1]>.
     The initial wide-character code of <[s2]> overwrites the null
     wide-character code at the end of <[s1]>. If copying takes place between
-    objects that overlap, the behaviour is undefined. 
+    objects that overlap, the behaviour is undefined.
 
 RETURNS
     The <<wcscat>> function returns <[s1]>;
-    no return value is reserved to indicate an error. 
+    no return value is reserved to indicate an error.
 
 PORTABILITY
 <<wcscat>> is ISO/IEC 9899/AMD1:1995 (ISO C).
@@ -63,15 +63,15 @@ No supporting OS subroutines are required.
 
 #include "../../string.h"
 
-wchar * tr_wcscat(wchar * s1, const wchar * s2)
+xwchar_t * string_wcscat(xwchar_t * s1, const xwchar_t * s2)
 {
-    wchar * s = s1;
+    xwchar_t * s = s1;
 
     while (*s1)
-    	++s1;
+        ++s1;
 
-    while (*s1++ = *s2++)
-    	;
+    while ((*s1++ = *s2++) != 0)
+        ;
 
     return s;
 }
